@@ -1,2 +1,2 @@
-# Candela
+# Nomos
 Interpeting your trading starts 
