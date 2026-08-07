@@ -1,3 +1,9 @@
+# CLion IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+
 # Prerequisites
 *.d
 
