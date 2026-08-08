@@ -1,122 +1,227 @@
 <mxfile host="app.diagrams.net" version="30.2.6">
   <diagram id="nomos-arch" name="Nomos Architecture">
     <mxGraphModel dx="1400" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1"
-        connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300"
-        pageHeight="1250" math="0" shadow="0">
+        connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1520"
+        pageHeight="1560" math="0" shadow="0">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
 
         <mxCell id="title" value="Nomos — Live Trader Architecture"
             style="text;html=1;fontSize=22;fontStyle=1;align=left;verticalAlign=middle;"
-            vertex="1" parent="1"><mxGeometry x="380" y="20" width="540" height="34" as="geometry"/></mxCell>
+            vertex="1" parent="1"><mxGeometry x="480" y="20" width="600" height="34" as="geometry"/></mxCell>
 
         <!-- ===================== AUTHORING PLANE ===================== -->
         <mxCell id="auth" value="Authoring Plane  —  Python (external repo)"
             style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;fontStyle=1;fontSize=13;"
-            vertex="1" parent="1"><mxGeometry x="370" y="70" width="560" height="180" as="geometry"/></mxCell>
+            vertex="1" parent="1"><mxGeometry x="480" y="70" width="540" height="180" as="geometry"/></mxCell>
         <mxCell id="a1" value="Indicators" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;"
-            vertex="1" parent="1"><mxGeometry x="395" y="115" width="240" height="45" as="geometry"/></mxCell>
+            vertex="1" parent="1"><mxGeometry x="500" y="115" width="240" height="45" as="geometry"/></mxCell>
         <mxCell id="a2" value="Strategy Parser" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;"
-            vertex="1" parent="1"><mxGeometry x="665" y="115" width="240" height="45" as="geometry"/></mxCell>
+            vertex="1" parent="1"><mxGeometry x="760" y="115" width="240" height="45" as="geometry"/></mxCell>
         <mxCell id="a3" value="Strategies" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;"
-            vertex="1" parent="1"><mxGeometry x="395" y="180" width="240" height="45" as="geometry"/></mxCell>
+            vertex="1" parent="1"><mxGeometry x="500" y="180" width="240" height="45" as="geometry"/></mxCell>
         <mxCell id="a4" value="Backtest / Research" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;"
-            vertex="1" parent="1"><mxGeometry x="665" y="180" width="240" height="45" as="geometry"/></mxCell>
+            vertex="1" parent="1"><mxGeometry x="760" y="180" width="240" height="45" as="geometry"/></mxCell>
 
         <!-- ===================== CONTRACT ===================== -->
         <mxCell id="con" value="Contract  —  shared &amp; versioned (Python ↔ C++ handoff)"
             style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontStyle=1;fontSize=13;"
-            vertex="1" parent="1"><mxGeometry x="370" y="300" width="560" height="140" as="geometry"/></mxCell>
-        <mxCell id="c1" value="Strategy IR&#10;(FlatBuffers schema)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;"
-            vertex="1" parent="1"><mxGeometry x="395" y="345" width="240" height="70" as="geometry"/></mxCell>
-        <mxCell id="c2" value="Conformance&#10;test vectors" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;"
-            vertex="1" parent="1"><mxGeometry x="665" y="345" width="240" height="70" as="geometry"/></mxCell>
+            vertex="1" parent="1"><mxGeometry x="480" y="300" width="540" height="200" as="geometry"/></mxCell>
+        <mxCell id="c1" value="&lt;b&gt;Strategy Bundle&lt;/b&gt;&#10;strategy.fb (IR) · universe.fb&#10;limits.fb · manifest.json"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;"
+            vertex="1" parent="1"><mxGeometry x="500" y="345" width="240" height="75" as="geometry"/></mxCell>
+        <mxCell id="c2" value="&lt;b&gt;Conformance vectors&lt;/b&gt;&#10;indicator goldens&#10;+ shadow-replay decisions"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;"
+            vertex="1" parent="1"><mxGeometry x="760" y="345" width="240" height="75" as="geometry"/></mxCell>
+        <mxCell id="c3" value="Binary FlatBuffers is canonical (bit-exact floats). JSON only as debug rendering via flatc.&#10;Delivered as a bundle on disk → activated by POST /strategies: validate → warm up → arm."
+            style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f0f8ef;strokeColor=#82b366;dashed=1;fontSize=10;align=left;spacingLeft=8;"
+            vertex="1" parent="1"><mxGeometry x="500" y="435" width="500" height="50" as="geometry"/></mxCell>
 
         <!-- ===================== EXECUTION PLANE ===================== -->
         <mxCell id="exe" value="Execution Plane  —  C++ (this repo)"
-            style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;fontStyle=1;fontSize=13;dashed=0;"
-            vertex="1" parent="1"><mxGeometry x="120" y="490" width="1060" height="640" as="geometry"/></mxCell>
+            style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;align=left;spacingLeft=16;fontStyle=1;fontSize=13;"
+            vertex="1" parent="1"><mxGeometry x="120" y="560" width="1380" height="840" as="geometry"/></mxCell>
+
+        <!-- thread containers -->
+        <mxCell id="t1" value="T1 — Feed / IO thread"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#6c8ebf;dashed=1;dashPattern=8 8;strokeWidth=2;verticalAlign=top;fontSize=11;fontStyle=2;fontColor=#3b5f8a;"
+            vertex="1" parent="1"><mxGeometry x="540" y="610" width="380" height="100" as="geometry"/></mxCell>
+        <mxCell id="t2" value="T2 — Engine thread   (sequential hot path)"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#6c8ebf;dashed=1;dashPattern=8 8;strokeWidth=2;verticalAlign=top;fontSize=11;fontStyle=2;fontColor=#3b5f8a;"
+            vertex="1" parent="1"><mxGeometry x="540" y="745" width="380" height="430" as="geometry"/></mxCell>
 
         <!-- central pipeline -->
-        <mxCell id="e3" value="Market Data&#10;(feed + bar builder)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;"
-            vertex="1" parent="1"><mxGeometry x="470" y="540" width="300" height="56" as="geometry"/></mxCell>
-        <mxCell id="e4" value="Indicator library&#10;(streaming)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;"
-            vertex="1" parent="1"><mxGeometry x="470" y="636" width="300" height="56" as="geometry"/></mxCell>
-        <mxCell id="e5" value="Strategy Engine&#10;(IR interpreter)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;"
-            vertex="1" parent="1"><mxGeometry x="470" y="732" width="300" height="56" as="geometry"/></mxCell>
-        <mxCell id="e6" value="OMS + Risk&#10;(kill switch)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;"
-            vertex="1" parent="1"><mxGeometry x="470" y="828" width="300" height="56" as="geometry"/></mxCell>
-        <mxCell id="e7" value="IBroker interface  (swappable seam)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;"
-            vertex="1" parent="1"><mxGeometry x="470" y="924" width="300" height="50" as="geometry"/></mxCell>
-        <mxCell id="e8" value="Broker driver: IBKR&#10;(TWS API / IB Gateway)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;"
-            vertex="1" parent="1"><mxGeometry x="470" y="1014" width="300" height="56" as="geometry"/></mxCell>
+        <mxCell id="e3" value="Market Data — feed handler&#10;decode · normalize · timestamp"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;"
+            vertex="1" parent="1"><mxGeometry x="560" y="650" width="340" height="50" as="geometry"/></mxCell>
+        <mxCell id="e3b" value="Bar Builder  (bar-close = contract item)"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;"
+            vertex="1" parent="1"><mxGeometry x="560" y="790" width="340" height="46" as="geometry"/></mxCell>
+        <mxCell id="e4" value="Indicator library  (streaming)"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;"
+            vertex="1" parent="1"><mxGeometry x="560" y="851" width="340" height="46" as="geometry"/></mxCell>
+        <mxCell id="e5" value="Strategy Engine  (IR interpreter)"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;"
+            vertex="1" parent="1"><mxGeometry x="560" y="912" width="340" height="46" as="geometry"/></mxCell>
+        <mxCell id="e5b" value="&lt;b&gt;Portfolio / Allocator&lt;/b&gt;&#10;sizing · contention · exposure caps · dedup"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=3;fontSize=12;"
+            vertex="1" parent="1"><mxGeometry x="560" y="973" width="340" height="56" as="geometry"/></mxCell>
+        <mxCell id="e6" value="OMS + Risk   (pre-trade checks · idempotent IDs)"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;"
+            vertex="1" parent="1"><mxGeometry x="560" y="1044" width="340" height="46" as="geometry"/></mxCell>
+        <mxCell id="jr" value="Order Journal  —  mmap append (no fsync here)"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;"
+            vertex="1" parent="1"><mxGeometry x="560" y="1105" width="340" height="46" as="geometry"/></mxCell>
+
+        <mxCell id="e7" value="IBroker interface  (swappable seam)"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;"
+            vertex="1" parent="1"><mxGeometry x="560" y="1205" width="340" height="46" as="geometry"/></mxCell>
+        <mxCell id="e8" value="Broker driver: IBKR (TWS API / IB Gateway)&#10;&lt;i&gt;read path runs on T1 · write path runs on T2&lt;/i&gt;"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;"
+            vertex="1" parent="1"><mxGeometry x="560" y="1276" width="340" height="60" as="geometry"/></mxCell>
 
         <!-- right rail: cross-cutting services -->
-        <mxCell id="e1" value="Clock / Time&#10;&amp; Deadline budgeting" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;"
-            vertex="1" parent="1"><mxGeometry x="880" y="636" width="240" height="56" as="geometry"/></mxCell>
-        <mxCell id="e9" value="Telemetry / Logging&#10;/ Order Journal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;"
-            vertex="1" parent="1"><mxGeometry x="880" y="828" width="240" height="56" as="geometry"/></mxCell>
-        <mxCell id="e2" value="Session / Connection mgmt&#10;(reconnect · heartbeat)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;"
-            vertex="1" parent="1"><mxGeometry x="880" y="1014" width="240" height="56" as="geometry"/></mxCell>
+        <mxCell id="sm" value="&lt;b&gt;Subscription Manager&lt;/b&gt;&#10;universe = ∪ symbols of armed strategies&#10;ref-count · pin open positions · LRU evict&#10;admission check vs IBKR line cap (~100)"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=3;fontSize=11;"
+            vertex="1" parent="1"><mxGeometry x="990" y="640" width="330" height="74" as="geometry"/></mxCell>
+        <mxCell id="e1" value="Clock / Time  (T5)&#10;RTT + offset · latency histograms&#10;deadline budget → PASS decision"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;"
+            vertex="1" parent="1"><mxGeometry x="990" y="780" width="330" height="64" as="geometry"/></mxCell>
+        <mxCell id="api" value="&lt;b&gt;Control / Query plane  (T4)&lt;/b&gt;&#10;embedded HTTP · JSON · loopback/UDS&#10;GET /status /pnl /positions /orders&#10;GET /events (SSE) · POST /strategies /kill&#10;reads a seqlock snapshot — never blocks T2"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=3;fontSize=11;"
+            vertex="1" parent="1"><mxGeometry x="990" y="960" width="330" height="96" as="geometry"/></mxCell>
+        <mxCell id="e9" value="Telemetry / Logging  (T3)&#10;async writer · journal fsync · metrics"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;"
+            vertex="1" parent="1"><mxGeometry x="990" y="1100" width="330" height="64" as="geometry"/></mxCell>
+        <mxCell id="e2" value="Session / Connection mgmt&#10;connect→auth→subscribe→live→degraded&#10;heartbeat · backoff · resubscribe"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;"
+            vertex="1" parent="1"><mxGeometry x="990" y="1266" width="330" height="64" as="geometry"/></mxCell>
+
+        <!-- left rail -->
+        <mxCell id="kill" value="&lt;b&gt;Kill switch — out-of-band&lt;/b&gt;&#10;signal · watched file · flag checked&#10;every engine iteration (never via HTTP)"
+            style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=3;fontSize=11;"
+            vertex="1" parent="1"><mxGeometry x="220" y="1044" width="280" height="60" as="geometry"/></mxCell>
+
+        <mxCell id="legend" value="&lt;b&gt;Legend&lt;/b&gt;&#10;orange chain  =  hot path, one thread (T2)&#10;red arrow     =  thread boundary (SPSC ring)&#10;dashed purple =  cross-cutting service&#10;dashed box    =  OS thread&#10;&#10;ONE OS process; threads T1–T5. T2 is strictly&#10;sequential, allocation-free, single writer.&#10;Shard later by strategy group, not by symbol."
+            style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#999999;dashed=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fontSize=10;"
+            vertex="1" parent="1"><mxGeometry x="220" y="1130" width="310" height="155" as="geometry"/></mxCell>
 
         <!-- ===================== EXTERNAL VENUE ===================== -->
-        <mxCell id="ext" value="IBKR Gateway / Exchange  (external)"
+        <mxCell id="ext" value="IBKR Gateway / Exchange  (external process)"
             style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=13;"
-            vertex="1" parent="1"><mxGeometry x="470" y="1170" width="300" height="56" as="geometry"/></mxCell>
+            vertex="1" parent="1"><mxGeometry x="560" y="1430" width="340" height="56" as="geometry"/></mxCell>
 
         <!-- ===================== EDGES ===================== -->
         <!-- authoring -> contract -->
-        <mxCell id="ed1" value="compile → emit IR + vectors" style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;labelBackgroundColor=#ffffff;"
+        <mxCell id="ed1" value="compile → emit bundle + vectors"
+            style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;labelBackgroundColor=#ffffff;"
             edge="1" parent="1" source="auth" target="con"><mxGeometry relative="1" as="geometry"/></mxCell>
 
-        <!-- contract -> execution (two clean drops) -->
-        <mxCell id="ed2" value="load IR" style="endArrow=block;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;entryX=0;entryY=0.5;fontSize=11;labelBackgroundColor=#ffffff;"
+        <!-- contract -> execution -->
+        <mxCell id="ed2"
+            style="endArrow=block;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=2;exitX=0;exitY=0.5;entryX=0;entryY=0.5;fontSize=11;labelBackgroundColor=#ffffff;"
             edge="1" parent="1" source="c1" target="e5">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points"><mxPoint x="410" y="460"/><mxPoint x="410" y="760"/></Array>
+            <Array as="points"><mxPoint x="430" y="382"/><mxPoint x="430" y="935"/></Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="ed3" value="parity check (CI)" style="endArrow=block;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;strokeColor=#82b366;exitX=0.5;exitY=1;entryX=1;entryY=0.5;fontSize=11;labelBackgroundColor=#ffffff;"
+        <mxCell id="ed3"
+            style="endArrow=block;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;strokeWidth=2;strokeColor=#82b366;exitX=1;exitY=0.5;entryX=1;entryY=0.5;fontSize=11;labelBackgroundColor=#ffffff;"
             edge="1" parent="1" source="c2" target="e4">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points"><mxPoint x="815" y="470"/><mxPoint x="815" y="664"/></Array>
+            <Array as="points"><mxPoint x="1040" y="382"/><mxPoint x="1040" y="520"/><mxPoint x="930" y="520"/><mxPoint x="930" y="874"/></Array>
           </mxGeometry>
         </mxCell>
 
-        <!-- main vertical pipeline (down) -->
-        <mxCell id="ed5" value="normalized bars" style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;labelBackgroundColor=#ffffff;"
-            edge="1" parent="1" source="e3" target="e4"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="ed7" value="indicator values" style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;labelBackgroundColor=#ffffff;"
+        <!-- main vertical pipeline -->
+        <mxCell id="ed5" value="SPSC ring — thread boundary"
+            style="endArrow=block;html=1;rounded=0;strokeWidth=3;strokeColor=#b85450;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;fontStyle=1;fontColor=#b85450;labelBackgroundColor=#ffffff;"
+            edge="1" parent="1" source="e3" target="e3b">
+          <mxGeometry relative="1" as="geometry"><mxPoint as="offset" x="0" y="-27"/></mxGeometry>
+        </mxCell>
+        <mxCell id="ed6" value="closed bars"
+            style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;labelBackgroundColor=#ffffff;"
+            edge="1" parent="1" source="e3b" target="e4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ed7" value="indicator values"
+            style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;labelBackgroundColor=#ffffff;"
             edge="1" parent="1" source="e4" target="e5"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="ed8" value="order intents" style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;labelBackgroundColor=#ffffff;"
-            edge="1" parent="1" source="e5" target="e6"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="ed9" value="risk-checked orders" style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;labelBackgroundColor=#ffffff;"
-            edge="1" parent="1" source="e6" target="e7"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="ed10" style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;"
+        <mxCell id="ed8" value="intents (symbol · side · conviction)"
+            style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;labelBackgroundColor=#ffffff;"
+            edge="1" parent="1" source="e5" target="e5b"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ed8b" value="sized orders"
+            style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;labelBackgroundColor=#ffffff;"
+            edge="1" parent="1" source="e5b" target="e6"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ed8c" value="write-before-send"
+            style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;labelBackgroundColor=#ffffff;"
+            edge="1" parent="1" source="e6" target="jr"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ed9" value="encode + socket write (on T2)"
+            style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;labelBackgroundColor=#ffffff;"
+            edge="1" parent="1" source="jr" target="e7">
+          <mxGeometry relative="1" as="geometry"><mxPoint as="offset" x="0" y="19"/></mxGeometry>
+        </mxCell>
+        <mxCell id="ed10"
+            style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;"
             edge="1" parent="1" source="e7" target="e8"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="ed11" value="orders out" style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;labelBackgroundColor=#ffffff;"
+        <mxCell id="ed11" value="orders out"
+            style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=11;labelBackgroundColor=#ffffff;"
             edge="1" parent="1" source="e8" target="ext"><mxGeometry relative="1" as="geometry"/></mxCell>
 
-        <!-- market-data return path up the left side -->
-        <mxCell id="ed4" value="market data feed&#10;(quotes / trades)" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#2d7600;exitX=0;exitY=0.5;entryX=0;entryY=0.5;fontSize=11;labelBackgroundColor=#ffffff;"
-            edge="1" parent="1" source="ext" target="e3">
+        <!-- market-data return path up the far left -->
+        <mxCell id="ed4" value="market data in&#10;(quotes / trades)"
+            style="endArrow=block;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=2;strokeColor=#2d7600;exitX=0;exitY=0.5;entryX=0;entryY=0.85;fontSize=11;fontColor=#2d7600;labelBackgroundColor=#ffffff;"
+            edge="1" parent="1" source="e8" target="e3">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points"><mxPoint x="300" y="1198"/><mxPoint x="300" y="568"/></Array>
+            <Array as="points"><mxPoint x="175" y="1306"/><mxPoint x="175" y="692"/></Array>
           </mxGeometry>
         </mxCell>
 
-        <!-- cross-cutting (dashed) -->
-        <mxCell id="ed12" value="deadline / RTT" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#9673a6;exitX=0;exitY=0.5;entryX=1;entryY=0.35;fontSize=10;labelBackgroundColor=#ffffff;"
-            edge="1" parent="1" source="e1" target="e5"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="ed13" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#9673a6;exitX=0;exitY=0.75;entryX=1;entryY=0.35;"
-            edge="1" parent="1" source="e1" target="e6"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="ed15" value="decisions" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#9673a6;exitX=1;exitY=0.7;entryX=0;entryY=0.3;fontSize=10;labelBackgroundColor=#ffffff;"
-            edge="1" parent="1" source="e5" target="e9"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="ed16" value="orders / fills" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#9673a6;exitX=1;exitY=0.5;entryX=0;entryY=0.7;fontSize=10;labelBackgroundColor=#ffffff;"
-            edge="1" parent="1" source="e6" target="e9"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="ed14" value="reconnect / heartbeat" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#9673a6;exitX=0;exitY=0.5;entryX=1;entryY=0.5;fontSize=10;labelBackgroundColor=#ffffff;"
+        <!-- cross-cutting -->
+        <mxCell id="ed17" value="subscribe / evict"
+            style="endArrow=open;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#9673a6;exitX=0;exitY=0.5;entryX=1;entryY=0.55;fontSize=10;labelBackgroundColor=#ffffff;"
+            edge="1" parent="1" source="sm" target="e3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ed12" value="deadline / RTT"
+            style="endArrow=open;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;strokeWidth=2;strokeColor=#9673a6;exitX=0;exitY=0.31;entryX=1;entryY=0.39;fontSize=10;labelBackgroundColor=#ffffff;"
+            edge="1" parent="1" source="e1" target="e5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="960" y="800"/><mxPoint x="960" y="930"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ed18" value="seqlock snapshot"
+            style="endArrow=open;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;strokeWidth=2;strokeColor=#6c8ebf;exitX=1;exitY=0.24;entryX=0;entryY=0.52;fontSize=10;labelBackgroundColor=#ffffff;"
+            edge="1" parent="1" source="e6" target="api">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="945" y="1055"/><mxPoint x="945" y="1010"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ed16" value="async flush"
+            style="endArrow=open;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#9673a6;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontSize=10;labelBackgroundColor=#ffffff;"
+            edge="1" parent="1" source="jr" target="e9"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ed14" value="reconnect / heartbeat"
+            style="endArrow=open;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#9673a6;exitX=0;exitY=0.5;entryX=1;entryY=0.4;fontSize=10;labelBackgroundColor=#ffffff;"
             edge="1" parent="1" source="e2" target="e8"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ed19" value="halt"
+            style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=3;strokeColor=#b85450;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontSize=10;fontColor=#b85450;labelBackgroundColor=#ffffff;"
+            edge="1" parent="1" source="kill" target="e6">
+          <mxGeometry relative="1" as="geometry"><mxPoint as="offset" x="0" y="-14"/></mxGeometry>
+        </mxCell>
+
+        <!-- status back to Python -->
+        <mxCell id="ed20" value="GET /status /pnl /positions&#10;SSE /events  ·  POST control"
+            style="endArrow=block;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=2;strokeColor=#6c8ebf;exitX=1;exitY=0.5;entryX=1;entryY=0.9;fontSize=11;fontColor=#3b5f8a;labelBackgroundColor=#ffffff;"
+            edge="1" parent="1" source="api" target="auth">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="1420" y="1008"/><mxPoint x="1420" y="232"/></Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- standalone labels for the two long-haul edges -->
+        <mxCell id="lb1" value="parity check (CI)"
+            style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#2d7600;labelBackgroundColor=#ffffff;"
+            vertex="1" parent="1"><mxGeometry x="1048" y="512" width="130" height="20" as="geometry"/></mxCell>
+        <mxCell id="lb2" value="load IR (on arm)"
+            style="text;html=1;align=right;verticalAlign=middle;fontSize=11;labelBackgroundColor=#ffffff;"
+            vertex="1" parent="1"><mxGeometry x="290" y="905" width="130" height="20" as="geometry"/></mxCell>
 
       </root>
     </mxGraphModel>
